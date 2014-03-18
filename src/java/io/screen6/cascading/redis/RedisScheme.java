@@ -25,9 +25,20 @@ public class RedisScheme<Config> extends RedisBaseScheme<Config, TupleEntry, Str
     private String command = DEFAULT_COMMAND;
 
     public RedisScheme(Fields keyFields, Fields valueFields) {
+        this(keyFields, valueFields, DEFAULT_COMMAND);
+    }
+
+    public RedisScheme(Fields keyFields, Fields valueFields, String command) {
+        this(keyFields, valueFields, command, DEFAULT_KEY_DELIMITER, DEFAULT_VALUE_DELIMITER);
+    }
+
+    public RedisScheme(Fields keyFields, Fields valueFields, String command, String keyDelimiter, String valueDelimiter) {
         super(Fields.merge(keyFields, valueFields));
         this.keyFields = keyFields;
         this.valueFields = valueFields;
+        this.command = command;
+        this.keyDelimiter = keyDelimiter;
+        this.valueDelimiter = valueDelimiter;
     }
 
     @Override

@@ -27,11 +27,12 @@
 
 (defn -main
   [& args]
-  (let [sink (RedisSinkTap. "localhost" (RedisScheme. (Fields. (into-array String ["?key"])) (Fields. (into-array String ["?sum"]))))
+  (let [sink (RedisSinkTap. "localhost" (RedisScheme. (Fields. (into-array String ["?key"])) (Fields. (into-array String ["?val"])) "lpush"))
         ;; sink (stdout)
         ]
     (?- sink
-        (<- [?key ?sum]
+        (<- [?key ?val]
             (data ?key ?val)
-            (join ?val :> ?sum))))
+            ;; (join ?val :> ?sum)
+            )))
   (println "args" args))

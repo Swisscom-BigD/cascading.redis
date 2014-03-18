@@ -10,6 +10,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.exceptions.JedisConnectionException;
+import redis.clients.jedis.exceptions.JedisDataException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,8 +55,10 @@ public class RedisSchemeCollector<Config, Value> extends TupleEntrySchemeCollect
     }
 
     private void lpush(Jedis client, String key, Value value) {
-        Tuple entry = (Tuple) value;
-        for (Object item : entry) {
+        try {
+            client.lpush(key, (String) value);
+        } catch (JedisDataException exc) {
+            client.del(key);
             client.lpush(key, (String) value);
         }
     }
