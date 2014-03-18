@@ -39,6 +39,11 @@ public class RedisScheme<Config> extends RedisBaseScheme<Config, TupleEntry, Str
         this.command = command;
         this.keyDelimiter = keyDelimiter;
         this.valueDelimiter = valueDelimiter;
+        logger.debug("Created {}", this);
+    }
+
+    public String toString() {
+        return String.format("<RedisScheme %s; %s. Command: %s>", this.keyFields, this.valueFields, this.command);
     }
 
     @Override
