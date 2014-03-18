@@ -28,10 +28,6 @@ public class RedisSchemeCollector<Config, Value> extends TupleEntrySchemeCollect
         logger.info("Connected to {}:{}@{}", hostname, port, db);
     }
 
-    public void collect(String key, Value value) {
-        this.collect("set", key, value);
-    }
-
     public void collect(String command, String key, Value value) {
         Jedis client = pool.getResource();
         try {
