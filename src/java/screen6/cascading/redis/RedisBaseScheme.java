@@ -39,14 +39,16 @@ public abstract class RedisBaseScheme<Config, Intermediate, Value> extends Schem
     protected abstract Intermediate getIntermediate(TupleEntry tupleEntry);
     protected abstract String getKey(Intermediate tupleEntry);
     protected abstract Value getValue(Intermediate tupleEntry);
+    protected abstract String getCommand();
 
     @Override
     public void sink(FlowProcess<Config> flowProcess, SinkCall<Void, RedisSchemeCollector> sinkCall) throws IOException {
         Intermediate entry = getIntermediate(sinkCall.getOutgoingEntry());
         String key = getKey(entry);
         Value value = getValue(entry);
+        String command = getCommand();
         logger.info("what: {} {}", key, value);
-        sinkCall.getOutput().collect(key, value);
+        sinkCall.getOutput().collect(command, key, value);
     }
 
 }

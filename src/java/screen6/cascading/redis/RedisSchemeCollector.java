@@ -5,6 +5,7 @@ import java.io.IOException;
 import cascading.flow.FlowProcess;
 import cascading.tap.TapException;
 import cascading.tuple.TupleEntrySchemeCollector;
+import cascading.tuple.Tuple;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -27,7 +28,7 @@ public class RedisSchemeCollector<Config, Value> extends TupleEntrySchemeCollect
     }
 
     public void collect(String key, Value value) {
-        return this.collect("set", key, value);
+        this.collect("set", key, value);
     }
 
     public void collect(String command, String key, Value value) {
@@ -53,7 +54,10 @@ public class RedisSchemeCollector<Config, Value> extends TupleEntrySchemeCollect
     }
 
     private void lpush(Jedis client, String key, Value value) {
-        client.lpush(key, )
+        Tuple entry = (Tuple) value;
+        for (Object item : entry) {
+            client.lpush(key, (String) value);
+        }
     }
 
     @Override
