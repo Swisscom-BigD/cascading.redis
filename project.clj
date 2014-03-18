@@ -15,4 +15,11 @@
   :repositories [["conjars" "http://conjars.org/repo/"]]
   :dependencies [[redis.clients/jedis "2.4.2"]
                  [cascading/cascading-core "2.5.2"]
-                 [org.slf4j/slf4j-api "1.7.6"]])
+                 [org.slf4j/slf4j-api "1.7.6"]]
+
+  :scm {:url "git@github.com:screen6/cascading.redis.git"}
+  :pom-additions [:developers [:developer
+                               [:name "Andrii V. Mishkovskyi"]
+                               [:url "https://mishkovskyi.net/"]
+                               [:email "andrii@screen6.io"]
+                               [:timezone "+1"]]])
