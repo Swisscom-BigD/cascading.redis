@@ -1,4 +1,4 @@
-package screen6.cascading.redis;
+package io.screen6.cascading.redis;
 
 import java.io.IOException;
 import cascading.flow.FlowProcess;
