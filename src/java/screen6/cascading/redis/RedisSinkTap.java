@@ -3,17 +3,40 @@ package screen6.cascading.redis;
 import java.io.IOException;
 import cascading.tap.SinkTap;
 import cascading.flow.FlowProcess;
+import cascading.tuple.TupleEntryCollector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RedisSinkTap<Config> extends SinkTap<Config, Object> {
 
-    String hostname = "localhost";
-    int port = 6379;
-    int db = 0;
+    private static final Logger logger = LoggerFactory.getLogger(RedisSinkTap.class);
+
+    private static final String HOSTNAME = "localhost";
+    private static final int PORT = 6379;
+    private static final int DATABASE = 0;
+
+    private String hostname;
+    private int port;
+    private int db;
+
+    public RedisSinkTap(RedisBaseScheme scheme) {
+        this(HOSTNAME, PORT, DATABASE, scheme);
+    }
+
+    public RedisSinkTap(String hostname, RedisBaseScheme scheme) {
+        this(hostname, PORT, DATABASE, scheme);
+    }
 
     public RedisSinkTap(String hostname, int port, RedisBaseScheme scheme) {
+        this(hostname, port, DATABASE, scheme);
+    }
+
+    public RedisSinkTap(String hostname, int port, int db, RedisBaseScheme scheme) {
         super(scheme);
+        logger.info("Creating tap at {}:{}@{}", hostname, port, db);
         this.hostname = hostname;
         this.port = port;
+        this.db = db;
     }
 
     public TupleEntryCollector openForWrite(FlowProcess<Config> flowProcess, Object output) throws IOException {
@@ -47,7 +70,7 @@ public class RedisSinkTap<Config> extends SinkTap<Config, Object> {
 
     @Override
     public String getIdentifier() {
-        return "redis://" + this.hostname + ":" + this.port + "@" + this.db;
+        return String.format("redis://%s:%s@%s", this.hostname, this.port, this.db);
     }
 
 }
