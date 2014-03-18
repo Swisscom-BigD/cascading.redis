@@ -1,9 +1,9 @@
-(ns screen6.cascading.redis.core
+(ns io.screen6.cascading.redis.core
   (:require
    [cascalog.api :refer :all]
    [cascalog.logic.ops :as logic.ops])
   (:import
-   [screen6.cascading.redis RedisScheme RedisSinkTap]
+   [io.screen6.cascading.redis RedisScheme RedisSinkTap]
    [cascading.tuple Fields])
   (:gen-class))
 

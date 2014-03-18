@@ -1,11 +1,11 @@
-(defproject screen6.cascading/redis "0.1.0"
+(defproject io.screen6.cascading/redis "0.1.0"
   :description "Cascading tap for Redis"
   :url "http://opensource.screen6.io/"
   :license {:name "MIT"
             :url "http://opensource.org/licenses/MIT"}
   :java-source-paths ["src/java"]
   :source-paths ["src/clj"]
-  :main screen6.cascading.redis.core
+  :main io.screen6.cascading.redis.core
   :repositories [["conjars" "http://conjars.org/repo/"]]
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [redis.clients/jedis "2.4.2"]
