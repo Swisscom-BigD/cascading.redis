@@ -1,6 +1,6 @@
-(defproject io.screen6.cascading/redis "0.1.1-SNAPSHOT"
-  :description "Cascading tap for Redis"
-  :url "http://opensource.screen6.io/"
+(defproject com.swisscom.bigd.cascading/redis "0.1.1-SNAPSHOT"
+  :description "Cascading tap for Redis (Java 6)"
+  :url "http://www.swisscom.com/"
   :license {:name "MIT"
             :url "http://opensource.org/licenses/MIT"}
   :java-source-paths ["src/java"]
@@ -19,10 +19,4 @@
   :dependencies [[redis.clients/jedis "2.4.2"]
                  [cascading/cascading-core "2.5.2"]
                  [org.slf4j/slf4j-api "1.7.6"]]
-
-  :scm {:url "git@github.com:screen6/cascading.redis.git"}
-  :pom-additions [:developers [:developer
-                               [:name "Andrii V. Mishkovskyi"]
-                               [:url "https://mishkovskyi.net/"]
-                               [:email "andrii@screen6.io"]
-                               [:timezone "+1"]]])
+)

@@ -1,11 +1,12 @@
 package io.screen6.cascading.redis;
 
-import java.io.IOException;
-import cascading.tap.SinkTap;
 import cascading.flow.FlowProcess;
+import cascading.tap.SinkTap;
 import cascading.tuple.TupleEntryCollector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 public class RedisSinkTap<Config> extends SinkTap<Config, Object> {
 

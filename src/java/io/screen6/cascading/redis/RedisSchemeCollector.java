@@ -1,18 +1,14 @@
 package io.screen6.cascading.redis;
 
-import java.io.IOException;
-
 import cascading.flow.FlowProcess;
-import cascading.tap.TapException;
 import cascading.tuple.TupleEntrySchemeCollector;
-import cascading.tuple.Tuple;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 import redis.clients.jedis.exceptions.JedisDataException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class RedisSchemeCollector<Config, Value> extends TupleEntrySchemeCollector<Config, TupleEntrySchemeCollector> {
 
@@ -31,9 +27,10 @@ public class RedisSchemeCollector<Config, Value> extends TupleEntrySchemeCollect
     public void collect(String command, String key, Value value) {
         Jedis client = pool.getResource();
         try {
-            switch (command) {
-            case "set": this.set(client, key, value); break;
-            case "lpush": this.lpush(client, key, value); break;
+            if (command.equals("set")) {
+                this.set(client, key, value);
+            } else if (command.equals("lpush")) {
+                this.lpush(client, key, value);
             }
         } catch (JedisConnectionException exc) {
             if (client != null) {

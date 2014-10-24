@@ -1,6 +1,5 @@
 package io.screen6.cascading.redis;
 
-import java.io.IOException;
 import cascading.flow.FlowProcess;
 import cascading.scheme.Scheme;
 import cascading.scheme.SinkCall;
@@ -10,6 +9,8 @@ import cascading.tuple.Fields;
 import cascading.tuple.TupleEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 
 public abstract class RedisBaseScheme<Config, Intermediate, Value> extends Scheme<Config, Void, RedisSchemeCollector, Object[], Void> {
